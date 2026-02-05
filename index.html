@@ -3,98 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal News Portal</title>
+    <title>NEWGROHO24 PORTAL</title>
+
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Markdown converter -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
+
 <body class="bg-gray-100 font-sans">
 
-    <header class="bg-blue-900 text-white py-4 shadow-md">
-        <div class="container mx-auto flex justify-between items-center px-4">
-            <h1 class="text-3xl font-bold tracking-tighter italic">MY<span class="text-red-500">PORTAL</span></h1>
-            <nav class="hidden md:flex space-x-6 font-medium">
-                <a href="#" class="hover:text-gray-300">Home</a>
-                <a href="#" class="hover:text-gray-300">Teknologi</a>
-                <a href="#" class="hover:text-gray-300">Ekonomi</a>
-                <a href="#" class="hover:text-gray-300">Opini</a>
-            </nav>
-            <div class="flex items-center space-x-4">
-                <input type="text" placeholder="Cari berita..." class="px-3 py-1 rounded-sm text-black text-sm">
-                <button class="bg-red-600 px-4 py-1 rounded-sm font-bold">Login</button>
-            </div>
-        </div>
-    </header>
+<!-- ================= HEADER ================= -->
+<header class="bg-blue-900 text-white py-4 shadow-md">
+    <div class="container mx-auto flex justify-between items-center px-4">
 
-    <main class="container mx-auto mt-6 px-4">
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-            <div class="md:col-span-2 relative h-96 group overflow-hidden rounded-lg">
-                <img src="https://images.unsplash.com/photo-1504711432869-efd597cdd045?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
-                <div class="absolute bottom-0 left-0 p-6 bg-gradient-to-t from-black w-full text-white">
-                    <span class="bg-red-600 px-2 py-1 text-xs font-bold uppercase">Headline</span>
-                    <h2 class="text-3xl font-bold mt-2 leading-tight">Masa Depan AI di Tahun 2026: Apakah Kita Siap?</h2>
-                    <p class="text-sm mt-2 text-gray-300">5 Februari 2026 | Oleh Admin</p>
-                </div>
-            </div>
-            <div class="flex flex-col gap-4">
-                <div class="bg-white p-4 shadow-sm border-l-4 border-blue-900">
-                    <h3 class="font-bold hover:text-blue-700 cursor-pointer">Pasar Saham Global Menguat di Awal Kuartal Pertama</h3>
-                    <p class="text-xs text-gray-500 mt-1">2 jam yang lalu</p>
-                </div>
-                <div class="bg-white p-4 shadow-sm border-l-4 border-blue-900">
-                    <h3 class="font-bold hover:text-blue-700 cursor-pointer">Review Laptop Terbaru dengan Prosesor Kuantum</h3>
-                    <p class="text-xs text-gray-500 mt-1">4 jam yang lalu</p>
-                </div>
-                <div class="bg-white p-4 shadow-sm border-l-4 border-blue-900">
-                    <h3 class="font-bold hover:text-blue-700 cursor-pointer">Tips Menjaga Kesehatan Mental di Era Digital</h3>
-                    <p class="text-xs text-gray-500 mt-1">5 jam yang lalu</p>
-                </div>
-            </div>
-        </div>
+        <h1 class="text-2xl md:text-3xl font-bold">
+            NEWGROHO24 <span class="text-red-500">PORTAL</span>
+        </h1>
 
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div class="md:col-span-3 space-y-6">
-                <h4 class="text-xl font-bold border-b-2 border-red-600 inline-block mb-4">Berita Terbaru</h4>
-                
-                <div class="flex gap-4 bg-white p-4 rounded shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=300&q=80" class="w-32 h-32 object-cover rounded">
-                    <div>
-                        <h3 class="text-xl font-bold hover:text-red-600 transition">Transformasi Transportasi Publik di Ibu Kota Baru</h3>
-                        <p class="text-gray-600 text-sm mt-2 hidden md:block">Pemerintah meresmikan jalur kereta cepat otonom yang menghubungkan titik-titik strategis...</p>
-                        <span class="text-blue-600 text-xs font-bold mt-2 block">TEKNOLOGI</span>
-                    </div>
-                </div>
+        <nav class="hidden md:flex space-x-6 font-medium">
+            <a href="#">Home</a>
+            <a href="#">Teknologi</a>
+            <a href="#">Ekonomi</a>
+            <a href="#">Opini</a>
+        </nav>
 
-                <div class="flex gap-4 bg-white p-4 rounded shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1491336477066-31156b5e4f35?auto=format&fit=crop&w=300&q=80" class="w-32 h-32 object-cover rounded">
-                    <div>
-                        <h3 class="text-xl font-bold hover:text-red-600 transition">Gaya Hidup Minimalis: Tren yang Kembali Diminati Anak Muda</h3>
-                        <p class="text-gray-600 text-sm mt-2 hidden md:block">Banyak milenial dan Gen Z mulai beralih ke gaya hidup yang lebih sederhana dan berkelanjutan...</p>
-                        <span class="text-blue-600 text-xs font-bold mt-2 block">LIFESTYLE</span>
-                    </div>
-                </div>
-            </div>
+        <input type="text" placeholder="Cari berita..."
+               class="px-3 py-1 rounded-sm text-black text-sm">
+    </div>
+</header>
 
-            <aside class="space-y-6">
-                <div class="bg-white p-4 shadow-sm">
-                    <h4 class="font-bold border-b-2 border-blue-900 mb-4 pb-1 uppercase text-sm text-blue-900">Terpopuler</h4>
-                    <ol class="list-decimal list-inside space-y-3 font-semibold text-sm">
-                        <li class="hover:text-red-600 cursor-pointer">Cara Investasi Kripto di 2026</li>
-                        <li class="hover:text-red-600 cursor-pointer">Resep Kuliner Viral Bulan Ini</li>
-                        <li class="hover:text-red-600 cursor-pointer">Jadwal Timnas Indonesia</li>
-                    </ol>
-                </div>
-                <div class="bg-blue-900 text-white p-4 rounded text-center">
-                    <p class="text-sm">Berlangganan Newsletter</p>
-                    <input type="email" class="w-full mt-2 p-2 text-black text-xs" placeholder="Email Anda">
-                    <button class="bg-red-600 w-full mt-2 py-1 font-bold text-sm">Daftar</button>
-                </div>
-            </aside>
-        </div>
-    </main>
 
-    <footer class="bg-gray-800 text-white mt-12 py-8 text-center text-sm">
-        <p>&copy; 2026 My Personal News Portal. Dibuat dengan antusiasme.</p>
-    </footer>
+
+<!-- ================= MAIN ================= -->
+<main class="container mx-auto mt-8 px-4">
+
+    <h2 class="text-2xl font-bold mb-6 border-b-4 border-red-600 inline-block">
+        Berita Terbaru
+    </h2>
+
+    <!-- 🔥 SEMUA BERITA MUNCUL DI SINI OTOMATIS -->
+    <div id="news-container" class="space-y-6"></div>
+
+</main>
+
+
+
+<!-- ================= FOOTER ================= -->
+<footer class="bg-gray-800 text-white mt-12 py-8 text-center text-sm">
+    © 2026 NEWGROHO24 PORTAL
+</footer>
+
+
+
+<!-- ================= AUTO LOAD MARKDOWN ================= -->
+<script>
+/*
+    👉 TAMBAH FILE BARU DI SINI KALAU ADA BERITA BARU
+*/
+
+const files = [
+    "posts/berita1.md",
+    "posts/berita2.md"
+];
+
+const container = document.getElementById("news-container");
+
+files.forEach(file => {
+    fetch(file)
+        .then(res => res.text())
+        .then(md => {
+            const html = marked.parse(md);
+
+            container.innerHTML += `
+                <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
+                    ${html}
+                </div>
+            `;
+        });
+});
+</script>
 
 </body>
 </html>
