@@ -43,7 +43,7 @@
         Berita Terbaru
     </h2>
 
-    <!-- 🔥 SEMUA BERITA MUNCUL DI SINI OTOMATIS -->
+    <!-- Semua berita otomatis muncul di sini -->
     <div id="news-container" class="space-y-6"></div>
 
 </main>
@@ -57,12 +57,8 @@
 
 
 
-<!-- ================= AUTO LOAD MARKDOWN ================= -->
+<!-- ================= SCRIPT AUTO LOAD ================= -->
 <script>
-/*
-    👉 TAMBAH FILE BARU DI SINI KALAU ADA BERITA BARU
-*/
-
 const files = [
     "posts/berita1.md",
     "posts/berita2.md"
@@ -70,20 +66,30 @@ const files = [
 
 const container = document.getElementById("news-container");
 
-files.forEach(file => {
-    fetch(file)
-        .then(res => res.text())
-        .then(md => {
+async function loadPosts() {
+    for (const file of files) {
+        try {
+            const res = await fetch(file);
+            if (!res.ok) continue;
+
+            const md = await res.text();
             const html = marked.parse(md);
 
-            container.innerHTML += `
-                <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
-                    ${html}
-                </div>
-            `;
-        });
-});
+            const card = document.createElement("div");
+            card.className = "bg-white p-6 rounded-lg shadow hover:shadow-lg transition";
+
+            card.innerHTML = html;
+
+            container.appendChild(card);
+
+        } catch (e) {
+            console.log("Gagal load:", file);
+        }
+    }
+}
+
+loadPosts();
 </script>
 
 </body>
-</html>
+    </html>
