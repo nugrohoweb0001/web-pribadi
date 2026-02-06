@@ -6,15 +6,22 @@
     <title>NEWGROHO24 PORTAL</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     
     <style>
-        /* Memastikan konten markdown tetap rapi */
-        #news-container img { max-width: 100%; height: auto; border-radius: 8px; margin: 12px 0; }
-        #news-container h1 { font-size: 1.5rem; font-weight: bold; margin-bottom: 0.5rem; color: #1e3a8a; }
-        #news-container p { color: #4a5568; line-height: 1.6; margin-bottom: 1rem; }
-        #news-container a { color: #ef4444; text-decoration: underline; }
+        /* Styling untuk Markdown agar tetap rapi */
+        .prose-content img { max-width: 100%; height: auto; border-radius: 8px; margin: 12px 0; }
+        .prose-content h1 { font-size: 1.8rem; font-weight: bold; margin-bottom: 0.5rem; color: #1e3a8a; line-height: 1.2; }
+        .prose-content p { color: #4a5568; line-height: 1.6; margin-bottom: 1rem; }
+        .prose-content a { color: #ef4444; text-decoration: underline; }
+        
+        /* Khusus Headline agar teks tidak terlalu panjang jika markdown-nya besar */
+        #headline-container .prose-content {
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
     </style>
 </head>
 
@@ -22,18 +29,15 @@
 
 <header class="bg-blue-900 text-white py-2 shadow-md">
     <div class="container mx-auto flex justify-between items-center px-4">
-
         <a href="#" class="flex items-center">
             <img src="logo.png" alt="N24 Media Logo" class="h-12 md:h-16 w-auto transition-transform hover:scale-105">
         </a>
-
         <nav class="hidden md:flex space-x-6 font-medium">
             <a href="#" class="hover:text-red-400 transition">Home</a>
             <a href="#" class="hover:text-red-400 transition">Teknologi</a>
             <a href="#" class="hover:text-red-400 transition">Ekonomi</a>
             <a href="#" class="hover:text-red-400 transition">Opini</a>
         </nav>
-
         <div class="flex items-center">
             <input type="text" placeholder="Cari berita..."
                    class="px-3 py-1 rounded-sm text-black text-sm focus:outline-none focus:ring-2 focus:ring-red-500 hidden sm:block">
@@ -41,67 +45,91 @@
     </div>
 </header>
 
-
-
 <main class="container mx-auto mt-8 px-4 flex-grow">
-
-    <div class="flex items-center mb-6">
-        <h2 class="text-2xl font-bold border-b-4 border-red-600 pb-1">
-            Berita Terbaru
-        </h2>
-    </div>
-
-    <div id="news-container" class="grid grid-cols-1 gap-6">
+    
+    <section class="mb-12">
+        <div class="flex items-center mb-4">
+            <span class="bg-red-600 text-white px-3 py-1 text-sm font-bold uppercase tracking-widest mr-3">Headline</span>
+            <div class="flex-grow h-px bg-gray-300"></div>
         </div>
+        <div id="headline-container">
+            <div class="animate-pulse bg-white h-64 rounded-lg"></div>
+        </div>
+    </section>
+
+    <section>
+        <div class="flex items-center mb-6">
+            <h2 class="text-2xl font-bold border-b-4 border-red-600 pb-1">
+                Berita Terbaru
+            </h2>
+        </div>
+        <div id="news-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            </div>
+    </section>
 
 </main>
 
-
-
-<footer class="bg-gray-800 text-gray-400 mt-12 py-4 border-t border-gray-700">
+<footer class="bg-gray-800 text-gray-400 mt-12 py-8 border-t border-gray-700">
     <div class="container mx-auto px-4 text-center text-xs">
         <p>© 2026 <span class="font-bold text-white uppercase tracking-wider">N24 Media Portal</span>. Hak Cipta Dilindungi.</p>
     </div>
 </footer>
 
-
-
 <script>
-// Daftar file markdown berita Anda
+// Daftar file markdown
 const files = [
-    "posts/berita1.md",
-    "posts/berita2.md"
+    "posts/berita1.md", // Ini akan otomatis jadi Headline
+    "posts/berita2.md",
+    "posts/berita3.md"
 ];
 
-const container = document.getElementById("news-container");
+const headlineContainer = document.getElementById("headline-container");
+const newsContainer = document.getElementById("news-container");
 
 async function loadPosts() {
-    for (const file of files) {
+    // Bersihkan kontainer sebelum memuat
+    headlineContainer.innerHTML = "";
+    newsContainer.innerHTML = "";
+
+    for (let i = 0; i < files.length; i++) {
         try {
-            const res = await fetch(file);
-            if (!res.ok) {
-                console.warn(`File tidak ditemukan: ${file}`);
-                continue;
-            }
+            const res = await fetch(files[i]);
+            if (!res.ok) continue;
 
             const md = await res.text();
             const html = marked.parse(md);
 
-            // Membuat kartu artikel
-            const card = document.createElement("article");
-            card.className = "bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:shadow-lg transition-shadow duration-300";
-
-            card.innerHTML = html;
-
-            container.appendChild(card);
+            if (i === 0) {
+                // DESAIN UNTUK HEADLINE (Item Pertama)
+                headlineContainer.innerHTML = `
+                    <article class="relative overflow-hidden rounded-xl bg-white shadow-lg border border-gray-200 group">
+                        <div class="flex flex-col md:flex-row">
+                            <div class="md:w-2/3 p-8 prose-content">
+                                ${html}
+                                <a href="#" class="inline-block mt-4 font-bold text-red-600 hover:text-red-800">Baca Selengkapnya &rarr;</a>
+                            </div>
+                            <div class="md:w-1/3 bg-gray-200 flex items-center justify-center overflow-hidden">
+                                <div class="p-4 text-gray-400 italic text-center">
+                                    Format Headline: Gambar dari Markdown akan otomatis muncul di atas atau samping tergantung konten MD anda.
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            } else {
+                // DESAIN UNTUK DAFTAR BERITA BIASA
+                const card = document.createElement("article");
+                card.className = "bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-all prose-content";
+                card.innerHTML = html;
+                newsContainer.appendChild(card);
+            }
 
         } catch (e) {
-            console.error("Gagal memproses file:", file, e);
+            console.error("Gagal memproses file:", files[i], e);
         }
     }
 }
 
-// Jalankan fungsi load
 loadPosts();
 </script>
 
