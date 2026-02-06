@@ -1,84 +1,134 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEWGROHO24 PORTAL</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NEWGROHO24 PORTAL</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    
-    <style>
-        .prose-content img { max-width: 100%; height: auto; border-radius: 12px; margin: 20px 0; }
-        .prose-content h1 { font-size: 2.2rem; font-weight: 800; color: #1e3a8a; line-height: 1.2; margin-bottom: 1rem; }
-        .prose-content p { color: #374151; line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.1rem; }
-        
-        /* Truncate untuk list berita agar hanya judul yang muncul */
-        .line-clamp-title { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        
-        .dot.active { background-color: #ef4444; width: 30px; }
-        #slider-wrapper { transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-        .hidden-content { display: none; }
-    </style>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+.prose-content img { max-width:100%; height:auto; border-radius:12px; margin:20px 0; }
+.prose-content h1 { font-size:2.2rem; font-weight:800; color:#1e3a8a; line-height:1.2; margin-bottom:1rem; }
+.prose-content p { color:#374151; line-height:1.8; margin-bottom:1.5rem; font-size:1.1rem; }
+
+.line-clamp-title{
+display:-webkit-box;
+-webkit-line-clamp:2;
+-webkit-box-orient:vertical;
+overflow:hidden;
+}
+
+.dot.active{
+background:#ef4444;
+width:30px;
+}
+
+#slider-wrapper{
+transition:transform .6s cubic-bezier(.4,0,.2,1);
+}
+
+.hidden-content{display:none;}
+</style>
 </head>
 
 <body class="bg-gray-50 font-sans flex flex-col min-h-screen">
 
+<!-- ================= HEADER ================= -->
 <header class="bg-blue-900 text-white py-3 shadow-lg sticky top-0 z-50">
-    <div class="container mx-auto flex justify-between items-center px-4">
-        <a href="index.html" class="flex items-center">
-            <img src="logo.png" alt="N24 Logo" class="h-10 md:h-14 w-auto">
-        </a>
-        <nav class="hidden md:flex space-x-8 font-semibold">
-            <a href="index.html" class="hover:text-red-400">HOME</a>
-            <a href="#" class="hover:text-red-400">TEKNOLOGI</a>
-            <a href="#" class="hover:text-red-400">EKONOMI</a>
-        </nav>
-    </div>
+<div class="container mx-auto flex justify-between items-center px-4">
+
+<a href="index.html" class="flex items-center gap-3">
+
+<!-- ✅ FIX PATH LOGO -->
+<img
+src="assets/logo.png"
+alt="N24 Logo"
+class="h-10 md:h-14 w-auto"
+onerror="this.style.display='none'"
+>
+
+<span class="font-bold tracking-widest hidden sm:block">NEWGROHO24</span>
+
+</a>
+
+<nav class="hidden md:flex space-x-8 font-semibold">
+<a href="index.html" class="hover:text-red-400">HOME</a>
+<a href="#" class="hover:text-red-400">TEKNOLOGI</a>
+<a href="#" class="hover:text-red-400">EKONOMI</a>
+</nav>
+
+</div>
 </header>
 
+
+<!-- ================= MAIN ================= -->
 <main class="container mx-auto mt-8 px-4 flex-grow">
 
-    <div id="single-post-view" class="hidden-content max-w-4xl mx-auto bg-white p-6 md:p-12 rounded-3xl shadow-lg border border-gray-100">
-        <button onclick="window.location.href='index.html'" class="mb-6 text-blue-900 font-bold flex items-center hover:text-red-600">
-            ← Kembali ke Beranda
-        </button>
-        <div id="post-content" class="prose-content">
-            </div>
-    </div>
+<!-- SINGLE POST -->
+<div id="single-post-view"
+class="hidden-content max-w-4xl mx-auto bg-white p-6 md:p-12 rounded-3xl shadow-lg border">
 
-    <div id="main-view">
-        <section class="mb-16">
-            <div class="flex items-center mb-6">
-                <h2 class="text-xl font-black uppercase text-gray-800 mr-4">Headline</h2>
-                <div class="flex-grow h-1 bg-gradient-to-r from-red-600 to-transparent"></div>
-            </div>
-            <div class="relative group overflow-hidden rounded-3xl shadow-2xl bg-white border border-gray-100">
-                <div id="slider-wrapper" class="flex"></div>
-                <div id="dots-container" class="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-3"></div>
-            </div>
-        </section>
+<button
+onclick="window.location.href='index.html'"
+class="mb-6 text-blue-900 font-bold hover:text-red-600">
+← Kembali ke Beranda
+</button>
 
-        <section>
-            <div class="flex items-center mb-8">
-                <h2 class="text-2xl font-bold border-b-4 border-blue-900 pb-1 text-blue-900 uppercase">Berita Terbaru</h2>
-            </div>
-            <div id="news-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                </div>
-        </section>
-    </div>
+<div id="post-content" class="prose-content"></div>
+</div>
 
+
+<!-- HOME -->
+<div id="main-view">
+
+<!-- HEADLINE -->
+<section class="mb-16">
+<div class="flex items-center mb-6">
+<h2 class="text-xl font-black uppercase mr-4">Headline</h2>
+<div class="flex-grow h-1 bg-gradient-to-r from-red-600 to-transparent"></div>
+</div>
+
+<div class="relative overflow-hidden rounded-3xl shadow-2xl bg-white">
+<div id="slider-wrapper" class="flex"></div>
+<div id="dots-container"
+class="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-3"></div>
+</div>
+</section>
+
+
+<!-- BERITA -->
+<section>
+<h2 class="text-2xl font-bold border-b-4 border-blue-900 pb-1 text-blue-900 uppercase mb-8">
+Berita Terbaru
+</h2>
+
+<div id="news-container"
+class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+</section>
+
+</div>
 </main>
 
-<footer class="bg-gray-900 text-gray-400 mt-16 py-10 border-t-4 border-red-600">
-    <div class="container mx-auto px-4 text-center">
-        <p class="mb-2 uppercase tracking-widest text-white font-bold">N24 Media Portal</p>
-        <p class="text-sm">© 2026 Hak Cipta Dilindungi.</p>
-    </div>
+
+<!-- ================= FOOTER ================= -->
+<footer class="bg-gray-900 text-gray-400 mt-16 py-10 border-t-4 border-red-600 text-center">
+<p class="uppercase tracking-widest text-white font-bold">N24 Media Portal</p>
+<p class="text-sm">© 2026 Hak Cipta Dilindungi.</p>
 </footer>
 
+
+<!-- ================= SCRIPT ================= -->
 <script>
-const files = ["posts/berita1.md", "posts/berita2.md", "posts/berita3.md", "posts/berita4.md", "posts/berita5.md"];
+const files = [
+"posts/berita1.md",
+"posts/berita2.md",
+"posts/berita3.md",
+"posts/berita4.md",
+"posts/berita5.md"
+];
+
 const sliderWrapper = document.getElementById("slider-wrapper");
 const newsContainer = document.getElementById("news-container");
 const dotsContainer = document.getElementById("dots-container");
@@ -86,102 +136,120 @@ const dotsContainer = document.getElementById("dots-container");
 let currentSlide = 0;
 let totalHeadline = 0;
 
-// Fungsi untuk mengambil parameter dari URL (?post=namafile.md)
-function getPostParam() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get('post');
+
+/* ================= GET PARAM ================= */
+function getPostParam(){
+const params = new URLSearchParams(window.location.search);
+return params.get('post');
 }
 
-async function init() {
-    const postFile = getPostParam();
 
-    if (postFile) {
-        // JIKA SEDANG MEMBACA BERITA
-        document.getElementById('main-view').classList.add('hidden-content');
-        document.getElementById('single-post-view').classList.remove('hidden-content');
-        loadSinglePost(postFile);
-    } else {
-        // JIKA DI HALAMAN UTAMA
-        loadHome();
-    }
+/* ================= INIT ================= */
+async function init(){
+const postFile = getPostParam();
+
+if(postFile){
+document.getElementById('main-view').classList.add('hidden-content');
+document.getElementById('single-post-view').classList.remove('hidden-content');
+loadSinglePost(postFile);
+}else{
+loadHome();
+}
 }
 
-async function loadSinglePost(file) {
-    try {
-        const res = await fetch(file);
-        const md = await res.text();
-        document.getElementById('post-content').innerHTML = marked.parse(md);
-    } catch (e) {
-        document.getElementById('post-content').innerHTML = "<h1>Berita tidak ditemukan.</h1>";
-    }
+
+/* ================= LOAD SINGLE ================= */
+async function loadSinglePost(file){
+try{
+const res = await fetch(file);
+const md = await res.text();
+document.getElementById('post-content').innerHTML = marked.parse(md);
+}catch{
+document.getElementById('post-content').innerHTML = "<h1>Berita tidak ditemukan</h1>";
+}
 }
 
-async function loadHome() {
-    for (let i = 0; i < files.length; i++) {
-        try {
-            const res = await fetch(files[i]);
-            const md = await res.text();
-            
-            // Ambil hanya Judul (Asumsi Judul adalah baris pertama Markdown # Judul)
-            const title = md.split('\n')[0].replace('# ', '');
 
-            // 1. Render Headline (3 Pertama)
-            if (i < 3) {
-                const slide = document.createElement("div");
-                slide.className = "min-w-full p-8 md:p-16 bg-white cursor-pointer";
-                slide.onclick = () => window.location.href = `?post=${files[i]}`;
-                slide.innerHTML = `
-                    <div class="prose-content">
-                        <span class="text-red-600 font-bold text-xs uppercase tracking-widest">🔥 Hot Topic</span>
-                        <h1 class="mt-2">${title}</h1>
-                        <p>Klik untuk membaca ulasan selengkapnya mengenai berita utama hari ini...</p>
-                    </div>
-                `;
-                sliderWrapper.appendChild(slide);
-                
-                const dot = document.createElement("div");
-                dot.className = `dot h-2 w-2 rounded-full bg-gray-300 cursor-pointer`;
-                dot.onclick = (e) => { e.stopPropagation(); goToSlide(i); };
-                dotsContainer.appendChild(dot);
-                totalHeadline++;
-            }
+/* ================= LOAD HOME ================= */
+async function loadHome(){
 
-            // 2. Render Berita Terbaru (Hanya Judul)
-            const card = document.createElement("article");
-            card.className = "bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-red-500 hover:shadow-md transition-all cursor-pointer group";
-            card.onclick = () => window.location.href = `?post=${files[i]}`;
-            card.innerHTML = `
-                <div class="text-xs text-gray-400 mb-2 uppercase font-bold tracking-tighter">Update</div>
-                <h3 class="text-lg font-bold text-blue-900 group-hover:text-red-600 transition line-clamp-title">${title}</h3>
-                <div class="mt-4 text-sm text-gray-500 font-medium italic">Baca artikel lengkap →</div>
-            `;
-            newsContainer.appendChild(card);
-        } catch (e) { console.error(e); }
-    }
-    startSlider();
+for(let i=0;i<files.length;i++){
+
+try{
+const res = await fetch(files[i]);
+const md = await res.text();
+const title = md.split('\n')[0].replace('# ', '');
+
+
+// ===== HEADLINE =====
+if(i < 3){
+const slide = document.createElement("div");
+slide.className="min-w-full p-10 cursor-pointer";
+slide.onclick = ()=>window.location.href=`?post=${files[i]}`;
+
+slide.innerHTML=`
+<span class="text-red-600 text-xs font-bold uppercase">🔥 Hot Topic</span>
+<h1 class="text-2xl font-bold mt-2">${title}</h1>
+<p class="text-gray-500 mt-3">Klik untuk membaca selengkapnya...</p>
+`;
+
+sliderWrapper.appendChild(slide);
+
+const dot=document.createElement("div");
+dot.className="dot h-2 w-2 rounded-full bg-gray-300 cursor-pointer";
+dot.onclick=(e)=>{e.stopPropagation();goToSlide(i)};
+dotsContainer.appendChild(dot);
+
+totalHeadline++;
 }
 
-function updateSlider() {
-    sliderWrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
-    document.querySelectorAll('.dot').forEach((dot, index) => {
-        dot.classList.toggle('active', index === currentSlide);
-    });
+
+// ===== LIST BERITA =====
+const card=document.createElement("article");
+card.className="bg-white p-6 rounded-2xl shadow hover:shadow-lg cursor-pointer";
+card.onclick=()=>window.location.href=`?post=${files[i]}`;
+
+card.innerHTML=`
+<div class="text-xs text-gray-400 mb-2 uppercase">Update</div>
+<h3 class="text-lg font-bold line-clamp-title">${title}</h3>
+`;
+
+newsContainer.appendChild(card);
+
+}catch(err){
+console.error(err);
+}
 }
 
-function goToSlide(index) { currentSlide = index; updateSlider(); }
+startSlider();
+}
 
-function startSlider() {
-    setInterval(() => {
-        if(totalHeadline > 0) {
-            currentSlide = (currentSlide + 1) % totalHeadline;
-            updateSlider();
-        }
-    }, 6000);
+
+/* ================= SLIDER ================= */
+function updateSlider(){
+sliderWrapper.style.transform=`translateX(-${currentSlide*100}%)`;
+
+document.querySelectorAll('.dot').forEach((dot,index)=>{
+dot.classList.toggle('active',index===currentSlide);
+});
+}
+
+function goToSlide(i){
+currentSlide=i;
+updateSlider();
+}
+
+function startSlider(){
+setInterval(()=>{
+if(totalHeadline>0){
+currentSlide=(currentSlide+1)%totalHeadline;
+updateSlider();
+}
+},6000);
 }
 
 init();
 </script>
 
 </body>
-    </html>
-    
+</html>
