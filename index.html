@@ -5,16 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEWGROHO24 PORTAL</title>
 
-    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Markdown converter -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <style>
+        /* Memastikan konten markdown seperti gambar tidak melebar keluar box */
+        #news-container img { max-width: 100%; height: auto; border-radius: 8px; margin: 10px 0; }
+        #news-container h1 { font-size: 1.5rem; font-weight: bold; margin-bottom: 0.5rem; }
+        #news-container p { color: #4a5568; line-height: 1.6; }
+    </style>
 </head>
 
-<body class="bg-gray-100 font-sans">
+<body class="bg-gray-100 font-sans flex flex-col min-h-screen">
 
-<!-- ================= HEADER ================= -->
 <header class="bg-blue-900 text-white py-4 shadow-md">
     <div class="container mx-auto flex justify-between items-center px-4">
 
@@ -23,41 +27,39 @@
         </h1>
 
         <nav class="hidden md:flex space-x-6 font-medium">
-            <a href="#">Home</a>
-            <a href="#">Teknologi</a>
-            <a href="#">Ekonomi</a>
-            <a href="#">Opini</a>
+            <a href="#" class="hover:text-red-400 transition">Home</a>
+            <a href="#" class="hover:text-red-400 transition">Teknologi</a>
+            <a href="#" class="hover:text-red-400 transition">Ekonomi</a>
+            <a href="#" class="hover:text-red-400 transition">Opini</a>
         </nav>
 
         <input type="text" placeholder="Cari berita..."
-               class="px-3 py-1 rounded-sm text-black text-sm">
+               class="px-3 py-1 rounded-sm text-black text-sm focus:outline-none focus:ring-2 focus:ring-red-500">
     </div>
 </header>
 
 
 
-<!-- ================= MAIN ================= -->
-<main class="container mx-auto mt-8 px-4">
+<main class="container mx-auto mt-8 px-4 flex-grow">
 
     <h2 class="text-2xl font-bold mb-6 border-b-4 border-red-600 inline-block">
         Berita Terbaru
     </h2>
 
-    <!-- Semua berita otomatis muncul di sini -->
-    <div id="news-container" class="space-y-6"></div>
+    <div id="news-container" class="grid gap-6"></div>
 
 </main>
 
 
 
-<!-- ================= FOOTER ================= -->
-<footer class="bg-gray-800 text-white mt-12 py-8 text-center text-sm">
-    © 2026 NEWGROHO24 PORTAL
+<footer class="bg-gray-800 text-gray-300 mt-12 py-3 border-t border-gray-700">
+    <div class="container mx-auto px-4 text-center text-xs">
+        <p>© 2026 <span class="font-bold text-white">NEWGROHO24 PORTAL</span>. Hak Cipta Dilindungi.</p>
+    </div>
 </footer>
 
 
 
-<!-- ================= SCRIPT AUTO LOAD ================= -->
 <script>
 const files = [
     "posts/berita1.md",
@@ -75,15 +77,15 @@ async function loadPosts() {
             const md = await res.text();
             const html = marked.parse(md);
 
-            const card = document.createElement("div");
-            card.className = "bg-white p-6 rounded-lg shadow hover:shadow-lg transition";
+            const card = document.createElement("article");
+            card.className = "bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition duration-300";
 
             card.innerHTML = html;
 
             container.appendChild(card);
 
         } catch (e) {
-            console.log("Gagal load:", file);
+            console.error("Gagal load:", file);
         }
     }
 }
@@ -92,4 +94,4 @@ loadPosts();
 </script>
 
 </body>
-    </html>
+</html>
